@@ -4,7 +4,7 @@
 
 ## Description 
 
-This PWA allows the user to log their transaction history to make budgeting easier! Users can name transactions that add or subtract funds from their total. The results are stored in list form and are also displayed in graph form. This PWA has offline functionality. 
+This PWA allows the user to log their transaction history to make budgeting easier! Users can name transactions that add or subtract funds from their total. The results are stored in list form and are also displayed in graph form. This PWA has offline functionality! 
 
 ## Table of Contents
 * [Technologies](#technologies)
