@@ -1,26 +1,13 @@
-// from youtube: make sure sw are supported
-if ('serviceWorker' in navigator) {
-    console.log('Service Worker Supported')
-}
-
 const FILES_TO_CACHE = [
     "/",
     "/index.html",
-    "/assets/css/style.css",
-    "/assets/js/loadPosts.js",
-    "/assets/images/Angular-icon.png",
-    "/assets/images/React-icon.png",
-    "/assets/images/Vue.js-icon.png",
+    "/style.css",
+    "/index.js",
     "/manifest.webmanifest",
-    "/favicon.ico",
-    "/assets/images/icons/icon-72x72.png",
-    "/assets/images/icons/icon-96x96.png",
-    "/assets/images/icons/icon-128x128.png",
-    "/assets/images/icons/icon-144x144.png",
-    "/assets/images/icons/icon-152x152.png",
-    "/assets/images/icons/icon-192x192.png",
-    "/assets/images/icons/icon-384x384.png",
-    "/assets/images/icons/icon-512x512.png",
+    "/icons/icon-192x192.png",
+    "/icons/icon-512x512.png",
+    // "/models/transaction.js",
+    // "/routes/api.js",
 ];
 
 const CACHE_NAME = "static-cache-v2";
@@ -57,6 +44,7 @@ self.addEventListener("activate", function (evt) {
 
 // fetch
 self.addEventListener("fetch", function (evt) {
+    console.log("Service Worker: Fetching");
     // cache successful requests to the API
     if (evt.request.url.includes("/api/")) {
         evt.respondWith(
