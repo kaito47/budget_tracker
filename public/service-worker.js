@@ -1,3 +1,4 @@
+// array that houses resources to cache
 const FILES_TO_CACHE = [
     "/",
     "/index.html",
@@ -10,7 +11,9 @@ const FILES_TO_CACHE = [
     // "/routes/api.js",
 ];
 
+// store static assets (css, html, images, javascript)
 const CACHE_NAME = "static-cache-v2";
+// store json back from server 
 const DATA_CACHE_NAME = "data-cache-v1";
 
 // install

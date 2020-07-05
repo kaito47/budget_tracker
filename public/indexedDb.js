@@ -1,42 +1,33 @@
-export function useIndexedDb(databaseName, storeName, method, object) {
-    return new Promise((resolve, reject) => {
-        const request = window.indexedDB.open(databaseName, 1);
-        let db,
-            tx,
-            store;
+// Create/open database
+var request = indexedDB.open("transactions", 1);
 
-        request.onupgradeneeded = function (e) {
-            const db = request.result;
-            db.createObjectStore(storeName, { keyPath: "_id" });
-        };
+request.onsuccess = function (event) {
+    console.log("Success creating/accessing IndexedDB database");
+    db = request.result;
 
-        request.onerror = function (e) {
-            console.log("There was an error");
-        };
+    db.onerror = function (event) {
+        console.log("Error creating/accessing IndexedDB database");
+    };
 
-        request.onsuccess = function (e) {
-            db = request.result;
-            tx = db.transaction(storeName, "readwrite");
-            store = tx.objectStore(storeName);
-
-            db.onerror = function (e) {
-                console.log("error");
+    // Interim solution for Google Chrome to create an objectStore. Will be deprecated
+    if (db.setVersion) {
+        if (db.version != dbVersion) {
+            var setVersion = db.setVersion(dbVersion);
+            setVersion.onsuccess = function () {
+                createObjectStore(db);
+                getImageFile();
             };
-            if (method === "put") {
-                store.put(object);
-            }
-            if (method === "clear") {
-                store.clear();
-            }
-            if (method === "get") {
-                const all = store.getAll();
-                all.onsuccess = function () {
-                    resolve(all.result);
-                };
-            }
-            tx.oncomplete = function () {
-                db.close();
-            };
-        };
-    });
+        }
+        else {
+            getImageFile();
+        }
+    }
+    else {
+        getImageFile();
+    }
 }
+
+// For future use. Currently only in latest Firefox versions
+request.onupgradeneeded = function (event) {
+    createObjectStore(event.target.result);
+};
