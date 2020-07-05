@@ -1,6 +1,6 @@
 # budget_tracker
 
-![deployedImage]()
+![deployedImage](https://github.com/kaito47/budget_tracker/blob/master/public/img.png)
 
 ## Description 
 
